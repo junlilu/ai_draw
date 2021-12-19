@@ -1,0 +1,14 @@
+python train.py \
+--image_text_folder /workspace/dalle/data/bird/eng/all \
+--bpe /workspace/dalle/data/bird/eng/bird_bpe.json \
+--dalle_path dalle.pt
+
+
+deepspeed train.py \
+--image_text_folder /workspace/dalle/data/bird/eng/all \
+--bpe /workspace/dalle/data/bird/eng/bird_bpe.json \
+--distr_backend 'deepspeed' \
+--amp
+
+
+docker run --gpus all -it --mount src="$(pwd)",target=/workspace/dalle,type=bind aidraw:latest2 bash
